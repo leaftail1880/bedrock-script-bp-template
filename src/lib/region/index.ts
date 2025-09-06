@@ -108,7 +108,6 @@ actionGuard((player, region, context) => {
       if (typeId === MinecraftItemTypes.EnderPearl) return ent.includes(MinecraftEntityTypes.EnderPearl)
       if (typeId === MinecraftItemTypes.WindCharge) return ent.includes(MinecraftEntityTypes.WindChargeProjectile)
       if (typeId === MinecraftItemTypes.Snowball) return ent.includes(MinecraftEntityTypes.Snowball)
-      if (typeId === Items.Fireball) return ent.includes(CustomEntityTypes.Fireball)
     }
   }
 }, ActionGuardOrder.ProjectileUsePrevent)

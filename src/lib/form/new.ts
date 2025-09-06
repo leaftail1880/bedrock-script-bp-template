@@ -3,9 +3,7 @@ import { ActionFormData, ActionFormResponse } from '@minecraft/server-ui'
 import { ActionForm } from 'lib/form/action'
 import { ask } from 'lib/form/message'
 import { showForm } from 'lib/form/utils'
-import { Message } from 'lib/i18n/message'
 import { i18n, noI18n } from 'lib/i18n/text'
-import { Quest } from 'lib/quest'
 import { doNothing, util } from 'lib/util'
 
 export type NewFormCallback = (player: Player, back?: NewFormCallback) => unknown
@@ -100,13 +98,6 @@ class Form {
     this.form.button(text.to(this.player.lang), icon ?? undefined)
     this.buttons.push(finalCallback)
     return this
-  }
-
-  quest(quest: Quest, textOverride?: Text, descriptionOverride?: Text) {
-    const rendered = quest.button.render(this.player, () => this.show(), descriptionOverride)
-    if (!rendered) return
-
-    this.button(textOverride && rendered[0] === quest.name ? textOverride : rendered[0], rendered[1], rendered[2])
   }
 
   /**

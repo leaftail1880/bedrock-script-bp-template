@@ -4,9 +4,7 @@
 // Do not modify manually.
     
 export enum CustomEntityTypes {
-  Cannon = 'lw:cannon',
   Database = 'rubedo:database',
-  Fireball = 'lw:fireball',
   Grave = 'lw:grave',
   Loot = 'lw:loot',
   Sit = 'lw:sit',

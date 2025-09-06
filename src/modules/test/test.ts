@@ -46,10 +46,7 @@ import { Compass } from 'lib/rpg/menu'
 import { setMinimapNpcPosition } from 'lib/rpg/minimap'
 import { toPoint } from 'lib/utils/point'
 import { Rewards } from 'lib/utils/rewards'
-import { requestAirdrop } from 'modules/places/anarchy/airdrop'
-import { BaseRegion } from 'modules/places/base/region'
 import { skipForBlending } from 'modules/world-edit/utils/blending'
-import loot from '../quests/learning/airdrop'
 import './enchant'
 import './load-chunks'
 import './minimap'
@@ -178,27 +175,6 @@ const tests: Record<
     })
   },
 
-  regionQuery(ctx) {
-    bench<unknown[]>(
-      ctx.player,
-      'region',
-      1000,
-      [Region, RoadRegion, SafeAreaRegion, BaseRegion]
-        // [Region]
-        .map(type => {
-          const label = noI18n`${type.name} ${type.getAll().length} - `
-          return [
-            [() => type.getManyAt(ctx.player, false), label + 'getManyAt old'],
-            [() => type.getManyAt(ctx.player, true), label + 'getManyAt §lnew'],
-            [() => type.getNear(ctx.player, 10, true), label + 'getNear old'],
-            [() => type.getNear(ctx.player, 10, false), label + 'getNear §lnew'],
-          ] as [VoidFunction, string][]
-        })
-        .flat(),
-      e => e.length,
-      50,
-    )
-  },
   potionAux(ctx) {
     for (const effect of Object.values(MinecraftPotionEffectTypes)) {
       const item = ItemStack.createPotion({ effect })
@@ -243,19 +219,6 @@ const tests: Record<
   },
   rotation(ctx) {
     ctx.reply(i18n`${ctx.player.getRotation()}`)
-  },
-  air(ctx) {
-    const airdrop = new Airdrop({ loot })
-    airdrop.spawn(Vec.add(ctx.player.location, { x: 0, y: 30, z: 0 }))
-    system.runInterval(
-      () => {
-        if (!airdrop.chest?.isValid) return
-
-        airdrop.showParticleTrace()
-      },
-      'testsa',
-      20,
-    )
   },
   scen(ctx) {
     const player = ctx.player
@@ -425,9 +388,6 @@ const tests: Record<
         }
       }),
     )
-  },
-  airdrop(ctx) {
-    requestAirdrop(!!ctx.args[2])
   },
   e(ctx) {
     const m = ctx.player.mainhand()

@@ -71,13 +71,7 @@ export const NOT_MOB_ENTITIES = [
   MinecraftEntityTypes.FishingHook,
 ] as string[]
 
-export const PVP_ENTITIES = [
-  MinecraftEntityTypes.Player,
-  MinecraftEntityTypes.Arrow,
-  MinecraftEntityTypes.Snowball,
-  CustomEntityTypes.Fireball,
-  CustomEntityTypes.Cannon,
-]
+export const PVP_ENTITIES = [MinecraftEntityTypes.Player, MinecraftEntityTypes.Arrow, MinecraftEntityTypes.Snowball]
 
 const ALLOW_SPAWN_PROP = 'allowSpawn'
 export function forceAllowSpawnInRegion(entity: Entity) {

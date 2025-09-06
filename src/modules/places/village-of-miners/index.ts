@@ -1,1 +1,0 @@
-import './village-of-miners'
