@@ -1,7 +1,6 @@
 import eslint from '@eslint/js'
 import prettier from 'eslint-config-prettier'
 import ts from 'typescript-eslint'
-import { eslintConfigForEnv } from './tools/eslint-plugin/helpers.js'
 
 const CI = process.env.CI
 const VSCODE = process.env.VSCODE_CWD
@@ -97,3 +96,12 @@ export default ts.config(
 
   eslintConfigForEnv(!CI, { plugins: { 'only-warn': (await import('eslint-plugin-only-warn')).default } }),
 )
+
+/**
+ * @param {string | undefined | boolean} env
+ * @param {import('@typescript-eslint/utils').TSESLint.FlatConfig.Config} config
+ */
+function eslintConfigForEnv(env, config) {
+  if (env) return config
+  return {}
+}
